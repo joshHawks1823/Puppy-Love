@@ -1,23 +1,39 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
+import React from 'react';
+import {Link} from 'react-router-dom'
+import { Card } from 'react-bootstrap';
+import Rating from './Rating';
 
-
-const Product = ({product}) => {
+const Product = ({ product }) => {
   return (
-    <Card className='my-3 p-3 rounded'>
-      <a href={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant='top' />
-      </a>
+    <Card className='my-3 p-3 rounded text-center' style={{height: '28rem'}}>
+      <Link to={`/product/${product._id}`}>
+        <Card.Img style={imgSize} src={product.image} variant='top' />
+      </Link>
       <Card.Body>
-      <a href={`/product/${product._id}`}>
-        <Card.Title as='div'><strong>{product.name}</strong></Card.Title> 
-      </a>
-      <Card.Text as='div'><div className='my-3'>{product.rating} from {product.numReviews} reviews</div></Card.Text>
+        <Link to={`/product/${product._id}`}>
+          <Card.Title as='div'>
+            <strong>{product.name}</strong>
+          </Card.Title>
+        </Link>
+        <Card.Text as='div'>
+          <Rating value={product.rating} text={`${product.numReviews} reviews`}   />
+        </Card.Text>
 
-      <Card.Text as='h3'>${product.price}</Card.Text>
+        <Card.Text as='h3'>${product.price}</Card.Text>
       </Card.Body>
     </Card>
-  )
+  );
+};
+
+ const imgSize = {
+  height: '250px',
+  width: '296px',
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto'
+
 }
 
-export default Product
+
+
+export default Product;
